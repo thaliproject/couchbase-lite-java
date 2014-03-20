@@ -1,12 +1,14 @@
 import com.couchbase.lite.*;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Manager manager = new Manager(new JavaContext(), Manager.DEFAULT_OPTIONS);
+        File workingDirectoryAsFile = Files.createTempDirectory("javacoretest").toFile();
+        Manager manager = new Manager(workingDirectoryAsFile, Manager.DEFAULT_OPTIONS);
 
         Database database = manager.getDatabase("food");
 

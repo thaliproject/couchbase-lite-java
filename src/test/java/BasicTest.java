@@ -6,6 +6,7 @@ import com.couchbase.lite.*;
 import junit.framework.TestCase;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,8 @@ import java.util.Map;
 public class BasicTest extends TestCase {
 
     public void testBasicFunctions() throws Exception {
-        Manager manager = new Manager(new JavaContext(), Manager.DEFAULT_OPTIONS);
+        File workingDirectoryAsFile = Files.createTempDirectory("javacoretest").toFile();
+        Manager manager = new Manager(workingDirectoryAsFile, Manager.DEFAULT_OPTIONS);
         assertNotNull("Cannot create manager.", manager);
 
         Database database = manager.getDatabase("food");
