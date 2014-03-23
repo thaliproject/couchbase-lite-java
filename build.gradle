@@ -33,7 +33,7 @@ dependencies {
 
     //compile fileTree(dir: 'libs', include: 'couchbase-lite-java-native-1.0.jar')
     compile 'com.couchbase.lite:java-native:' + System.getProperty("UPLOAD_VERSION_CBLITE")
-    compile 'com.couchbase.lite:java-core:' + System.getProperty("UPLOAD_VERSION_CBLITE")
+    //compile 'com.couchbase.lite:java-core:' + System.getProperty("UPLOAD_VERSION_CBLITE")
     compile 'org.apache.httpcomponents:httpcore:4.0-beta2'
     compile 'org.apache.httpcomponents:httpclient:4.0-beta1'
 

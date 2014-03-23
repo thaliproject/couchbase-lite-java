@@ -1,14 +1,33 @@
 import com.couchbase.lite.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
+class DeleteMe extends JavaContext {
+    private final File tempDirectory;
+    public DeleteMe() {
+        super();
+
+        try {
+            tempDirectory = Files.createTempDirectory("javacoretest").toFile();
+            tempDirectory.delete();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public File getRootDirectory() {
+        return tempDirectory;
+    }
+}
+
 public class Test {
     public static void main(String[] args) throws Exception {
-        File workingDirectoryAsFile = Files.createTempDirectory("javacoretest").toFile();
-        Manager manager = new Manager(workingDirectoryAsFile, Manager.DEFAULT_OPTIONS);
+        Manager manager = new Manager(new DeleteMe(), Manager.DEFAULT_OPTIONS);
 
         Database database = manager.getDatabase("food");
 

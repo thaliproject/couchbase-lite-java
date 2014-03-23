@@ -84,7 +84,6 @@ public class NativeUtils {
                 libraryFile = _extractLibrary(libraryName);
             }
 
-            System.load("C:\\Users\\yarong\\AppData\\Local\\Temp\\libgcc_s_dw2-1.dll");
             System.load(libraryFile.getAbsolutePath());
 
             LOADED_LIBRARIES.put(libraryName, true);
