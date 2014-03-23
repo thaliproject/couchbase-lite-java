@@ -24,7 +24,6 @@ public class BasicTest extends TestCase {
             @Override
             public void map(Map<String, Object> document, Emitter emitter) {
                 if (((String)document.get("id")).startsWith("food:")) {
-                    System.out.println("  " + document.get("id"));
                     emitter.emit(new Object[] {document.get("type"), document.get("name")}, document);
                 }
             }
