@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'java-library-distribution'
 apply plugin: 'maven'
 
-version = System.getenv("UPLOAD_VERSION_CBLITE")
+version = System.properties['UPLOAD_VERSION_CBLITE'] //System.getenv("UPLOAD_VERSION_CBLITE")
 
 repositories {
     mavenLocal()
@@ -43,7 +43,6 @@ artifacts {
 }
 
 task createMavenDirectory(type: Exec) {
-
     ext {
         uploadUser = System.getenv("UPLOAD_USERNAME") + ":" + System.getenv("UPLOAD_PASSWORD")
         mkcolPath = System.getenv("UPLOAD_MAVEN_REPO_URL") + "com/couchbase/lite/java/" + System.getenv("UPLOAD_VERSION_CBLITE") + "/"
@@ -75,8 +74,7 @@ uploadArchives {
             //    authentication(userName: System.getenv("UPLOAD_USERNAME"), password: System.getenv("UPLOAD_PASSWORD"))
             }
 
-            pom.version = "${System.properties['UPLOAD_VERSION_CBLITE']}"
-            //pom.version = System.getenv("UPLOAD_VERSION_CBLITE")
+            pom.version = version
             pom.groupId = 'com.couchbase.lite'
             pom.artifactId = 'java'
             pom.project {
