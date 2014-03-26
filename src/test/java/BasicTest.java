@@ -11,7 +11,7 @@ import java.util.Map;
 public class BasicTest extends TestCase {
 
     public void testBasicFunctions() throws Exception {
-        Manager manager = new Manager(new DeleteMe(), Manager.DEFAULT_OPTIONS);
+        Manager manager = new Manager(new DeleteMe(), Manager.DEFAULT_OPTIONS); // https://github.com/couchbase/couchbase-lite-java/issues/4
         assertNotNull("Cannot create manager.", manager);
 
         Database database = manager.getDatabase("food");

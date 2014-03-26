@@ -1,19 +1,18 @@
 package com.couchbase.lite.util;
 
-import com.couchbase.lite.Native;
-
+import com.couchbase.lite.Native; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.JarURLConnection;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.Enumeration;
+import java.net.JarURLConnection; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
+import java.net.URL; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
+import java.nio.file.Files; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
+import java.util.Enumeration;  //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+import java.util.jar.JarEntry; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
+import java.util.jar.JarFile; //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
 
 public class NativeUtils {
     public static final String TAG = "Native";
@@ -32,6 +31,7 @@ public class NativeUtils {
         }
     }
 
+    // https://github.com/couchbase/couchbase-lite-java/issues/7
     public static void loadLibrariesFromJar(String rootLibraryName)  {
         if (LOADED_LIBRARIES.containsKey(rootLibraryName)) {
             return;
@@ -104,6 +104,7 @@ public class NativeUtils {
         return name;
     }
 
+    // https://github.com/couchbase/couchbase-lite-java/issues/7
     private static File extractLibrary(String libraryPath, File targetFolder) throws IOException {
         String libraryName = new File(libraryPath).getName();
 
@@ -257,6 +258,7 @@ public class NativeUtils {
 //        return targetFile;
 //    }
 
+    // I broke this out because I needed to re-use the logic in loadLibrariesFromJar for https://github.com/couchbase/couchbase-lite-java/issues/7
     private static String basePathForLibrary() {
         // Root native folder.
         String path = "/native";
@@ -280,6 +282,7 @@ public class NativeUtils {
         return path + "/";
     }
 
+    // Since I created basePathForLibrary I decided to have _getLibraryResourcePath use it to
     private static String _getLibraryResourcePath(String libraryName) {
         return basePathForLibrary() + _getLibraryFullName(libraryName);
     }

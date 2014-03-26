@@ -10,8 +10,7 @@ public class JavaSQLiteStorageEngine implements SQLiteStorageEngine {
     private boolean transactionSuccessful = false;
     
     static {
-        //NativeUtils.loadLibrary("CouchbaseLiteJavaNative");
-        NativeUtils.loadLibrariesFromJar("CouchbaseLiteJavaNative");
+        NativeUtils.loadLibrariesFromJar("CouchbaseLiteJavaNative"); //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
     }
     
     private static void throwSQLException(String msg) throws SQLException {

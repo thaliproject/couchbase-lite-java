@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'java-library-distribution'
 apply plugin: 'maven'
 
-version = System.properties['UPLOAD_VERSION_CBLITE'] //System.getenv("UPLOAD_VERSION_CBLITE")
+version = System.properties['UPLOAD_VERSION_CBLITE'] //System.getenv("UPLOAD_VERSION_CBLITE")  https://github.com/couchbase/couchbase-lite-java/issues/11
 
 repositories {
     mavenLocal()
@@ -26,7 +26,7 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.0-beta2'
     compile group: 'commons-logging', name: 'commons-logging', version: '1.1.3'
 
-    //compile fileTree(dir: 'libs', include: '*.jar')
+    //compile fileTree(dir: 'libs', include: '*.jar')  https://github.com/couchbase/couchbase-lite-java/issues/6
 	compile 'com.couchbase.lite:java-native:' + version
 
     compile buildAgainstMavenArtifacts == null ?
@@ -59,7 +59,7 @@ task uploadArchivesWrapper(dependsOn: createMavenDirectory) << {
     uploadArchives.execute()
 }
 
-def mavenPath() {
+def mavenPath() {  // https://github.com/couchbase/couchbase-lite-java/issues/12
     artifactory_local == "true" ?
             'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath :
             artifactory_contextUrl + "/libs-release-local"
@@ -69,8 +69,8 @@ def mavenPath() {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: mavenPath()) {
-                authentication(userName: "${artifactory_user}", password: "${artifactory_password}")
+            repository(url: mavenPath()) {  // https://github.com/couchbase/couchbase-lite-java/issues/12
+                authentication(userName: "${artifactory_user}", password: "${artifactory_password}")  // https://github.com/couchbase/couchbase-lite-java/issues/11
             //repository(url: System.getenv("UPLOAD_MAVEN_REPO_URL")) {
             //    authentication(userName: System.getenv("UPLOAD_USERNAME"), password: System.getenv("UPLOAD_PASSWORD"))
             }

@@ -1,11 +1,12 @@
 import com.couchbase.lite.*;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.io.IOException; // https://github.com/couchbase/couchbase-lite-java/issues/4
+import java.nio.file.Files;  // https://github.com/couchbase/couchbase-lite-java/issues/4
 import java.util.HashMap;
 import java.util.Map;
 
+// This whole clase exists because of https://github.com/couchbase/couchbase-lite-java/issues/4
 class DeleteMe extends JavaContext {
     private final File tempDirectory;
     public DeleteMe() {
@@ -27,7 +28,7 @@ class DeleteMe extends JavaContext {
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        Manager manager = new Manager(new DeleteMe(), Manager.DEFAULT_OPTIONS);
+        Manager manager = new Manager(new DeleteMe(), Manager.DEFAULT_OPTIONS);  // https://github.com/couchbase/couchbase-lite-java/issues/4
 
         Database database = manager.getDatabase("food");
 
