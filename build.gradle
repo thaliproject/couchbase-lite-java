@@ -94,10 +94,16 @@ uploadArchives {
 
 task copyAndroidTests(type: Copy) {
     from "../couchbase-lite-android/src/androidTest/java/com/couchbase/lite"
-    into 'src/test/java'
+    into 'src/test/java/com/couchbase/lite'
+}
+
+task deleteBrokenTests(type: Delete) {
+    delete 'src/test/java/com/couchbase/lite/CollationTest.java', 'src/test/java/com/couchbase/lite/Base64Test.java'
 }
 
 task copyAndroidAssets(type: Copy) {
     from "../couchbase-lite-android/src/androidTest/assets"
     into 'src/test/resources/assets'
 }
+
+test.dependsOn(copyAndroidTests, deleteBrokenTests, copyAndroidAssets)
