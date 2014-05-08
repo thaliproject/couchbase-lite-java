@@ -122,7 +122,7 @@ public class JavaSQLiteStorageEngine implements SQLiteStorageEngine {
     private String path;
 
     static {
-        NativeUtils.loadLibrariesFromJar("CouchbaseLiteJavaNative"); //NativeUtils.loadLibrary("CouchbaseLiteJavaNative"); // https://github.com/couchbase/couchbase-lite-java/issues/7
+        NativeUtils.loadLibrary("CouchbaseLiteJavaNative");
     }
 
     // Currently this is used by the native library to throw a SQLException back to Java
@@ -475,5 +475,29 @@ public class JavaSQLiteStorageEngine implements SQLiteStorageEngine {
             _close(handle);
             handle = 0;
         }
+    }
+
+    /**
+     * Native method for testing JSON collator that can be called from Java Unit Testing.
+     */
+    private static native int nativeTestCollateJson(int mode, String string1, String string2);
+
+    /**
+     * Wrapper around nativeTestCollateJson.
+     */
+    public static int testCollateJSON(int mode, String string1, String string2) {
+        return nativeTestCollateJson(mode, string1, string2);
+    }
+
+    /**
+     * Native method for testing RevID Collator that can be called from Java Unit Testing.
+     */
+    private static native int nativeTestCollateRevIds(String string1, String string2);
+
+    /**
+     * Wrapper around nativeTestCollateRevIds.
+     */
+    public static int testCollateRevIds(String string1, String string2) {
+        return nativeTestCollateRevIds(string1, string2);
     }
 }

@@ -18,8 +18,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
     // Dependencies for testing with couchbase-lite-android test suits
-    // testCompile group: 'commons-io', name: 'commons-io', version: '2.0.1'
-    // compile group: 'org.json', name: 'json', version: '20090211'
+    testCompile group: 'commons-io', name: 'commons-io', version: '2.0.1'
+    testCompile 'com.couchbase.lite:java-listener:1.0.0-beta3rc1' // https://github.com/couchbase/couchbase-lite-android/issues/287
+    compile group: 'org.json', name: 'json', version: '20090211'
 
     // Dependencies required by couchbase-lite-java-core
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.0-beta1'
@@ -89,4 +90,14 @@ uploadArchives {
             }
         }
     }
+}
+
+task copyAndroidTests(type: Copy) {
+    from "../couchbase-lite-android/src/androidTest/java/com/couchbase/lite"
+    into 'src/test/java'
+}
+
+task copyAndroidAssets(type: Copy) {
+    from "../couchbase-lite-android/src/androidTest/assets"
+    into 'src/test/resources/assets'
 }
