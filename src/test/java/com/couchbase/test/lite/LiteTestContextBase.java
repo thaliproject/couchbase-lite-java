@@ -10,13 +10,17 @@ import java.nio.file.*;
  * and Android
  */
 public class LiteTestContextBase {
-    private File rootDirectory;
+    // There is an expectation in the tests that the root directory is the same for all contexts, so we simulate
+    // that by fixing the rootDirectory for the lifetime of the tests.
+    private static File rootDirectory = null;
 
     public LiteTestContextBase() {
-        try {
-            rootDirectory = Files.createTempDirectory("couchbaselitetest").toFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Could not create temp directory!", e);
+        if (rootDirectory == null) {
+            try {
+                rootDirectory = Files.createTempDirectory("couchbaselitetest").toFile();
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create temp directory!", e);
+            }
         }
     }
 

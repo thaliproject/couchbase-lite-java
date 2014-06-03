@@ -11,3 +11,6 @@
 .gradle
 local.properties
 /.DS_Store
+# These should always be copied fresh from Android
+src/test/java/com/couchbase/lite/
+src/test/resources
