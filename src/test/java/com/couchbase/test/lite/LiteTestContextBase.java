@@ -1,27 +1,24 @@
 package com.couchbase.test.lite;
 
-// https://github.com/couchbase/couchbase-lite-android/issues/285
-
 import java.io.*;
-import java.nio.file.*;
 
 /**
  * Provides a platform specific way to create a safe temporary directory location since this is different in Java
  * and Android
+ *
+ * Reference issue : https://github.com/couchbase/couchbase-lite-android/issues/285
  */
 public class LiteTestContextBase {
-    // There is an expectation in the tests that the root directory is the same for all contexts, so we simulate
-    // that by fixing the rootDirectory for the lifetime of the tests.
-    private static File rootDirectory = null;
+    private File rootDirectory;
 
     public LiteTestContextBase() {
-        if (rootDirectory == null) {
-            try {
-                rootDirectory = Files.createTempDirectory("couchbaselitetest").toFile();
-            } catch (IOException e) {
-                throw new RuntimeException("Could not create temp directory!", e);
-            }
+        rootDirectory = new File("couchbaselitetest");
+        if (!rootDirectory.exists()) {
+            rootDirectory.mkdir();
         }
+        
+        // ensure to have the absolute file path
+        rootDirectory = rootDirectory.getAbsoluteFile();
     }
 
     public File getRootDirectory() {
