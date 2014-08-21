@@ -3,6 +3,8 @@ apply plugin: 'java-library-distribution'
 apply plugin: 'maven'
 
 version = System.getProperty("MAVEN_UPLOAD_VERSION") // https://github.com/couchbase/couchbase-lite-java/issues/11
+group = 'com.couchbase.lite'
+archivesBaseName = 'java'
 
 repositories {
     mavenLocal()
@@ -75,9 +77,6 @@ uploadArchives {
                 authentication(userName: System.getProperty('MAVEN_UPLOAD_USERNAME'), password: System.getProperty('MAVEN_UPLOAD_PASSWORD')) // https://github.com/couchbase/couchbase-lite-java/issues/11
             }
 
-            pom.version = version
-            pom.groupId = 'com.couchbase.lite'
-            pom.artifactId = 'java'
             pom.project {
                 licenses {
                     license {
