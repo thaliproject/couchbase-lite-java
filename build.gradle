@@ -41,7 +41,7 @@ dependencies {
 
     compile buildAgainstMavenArtifacts == null ?
             project(':libraries:couchbase-lite-java-native') :
-            'com.couchbase.lite:java-native:' + version
+            'com.couchbase.lite:couchbase-lite-java-native:' + version
 }
 
 task sourcesJar(type: Jar) {
